@@ -34,7 +34,6 @@ class TdcGenerator:
 
     def createRoomPairings(self):
         parings = []
-        
 
     def createRoomOrder(self, pairings):
         pass
