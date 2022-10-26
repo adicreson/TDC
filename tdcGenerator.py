@@ -15,13 +15,13 @@ class TdcGenerator:
     def __randomOldie(self):
         randOldIdx = randint(0, len(self.oldies) - 1)
         randOldie = self.oldies.pop(randOldIdx)
-        return oldie
+        return randOldie
 
     #Randomly selects a random Oldie from newbies
     def __randomNewbie(self):
         randNewbIdx = randint(0, len(self.newbies) - 1)
-        newbie = self.newbies.pop(randNewbIdx)
-        return newbie
+        randNewbie = self.newbies.pop(randNewbIdx)
+        return randNewbie
 
     def createRoomPairings(self):
         #Assert guarantees that there are enough participants to create at least pairings of two for number of chosen rooms
@@ -30,34 +30,44 @@ class TdcGenerator:
         roomsLeftToCreate = self.nbrOfRooms
 
         if len(self.oldies) >= len(self.newbies):
+            #Start by creating pairs of newbies and oldies.
             while self.newbies:
-                newbie = self.__randomNewbie()
-                oldie = self.__randomOldie()
+                randNewbie = self.__randomNewbie()
+                randOldie = self.__randomOldie()
+                print(len(self.newbies))
+                print(len(self.oldies))
 
-                pairing = [newbie, oldie]
+                pairing = [randNewbie, randOldie]
                 pairings.append(pairing)
 
                 roomsLeftToCreate -= 1
-
+            #If there are still oldies left after creating pairs of newbies and oldies, create pairs of oldies.
             while self.oldies:
                 if roomsLeftToCreate != 0:
-                    oldie1 = self.__randomOldie()
-                    oldie2 = self.__randomOldie()
+                    randOldie1 = self.__randomOldie()
+                    randOldie2 = self.__randomOldie()
 
-                    pairing = [oldie1, oldie2]
-                    pairings.append[pairing]
+                    pairing = [randOldie1, randOldie2]
+                    pairings.append(pairing)
 
                     roomsLeftToCreate -= 1
+                    print("Rooms left to create: {}", roomsLeftToCreate)
                 else:
-                    assert len(pairings) == self.nbrOfRooms, "Error in code. There should be an equal amount of pairings and number of rooms"
+                    #If there are still oldies left after all pairs of two have been created, assign them randomly to the already created pairings.
+                    #Needs correction to ensure that the randOldies get evenly distributed
+                    while self.oldies:
+                        assert len(pairings) == self.nbrOfRooms, "Error in code. There should be an equal amount of pairings and number of rooms"
+                        print(len(self.oldies))
+                        randOldie = self.__randomOldie()
+                        pairIdx = randint(0, len(pairings) - 1)
+                        pairings[pairIdx].append(randOldie)
+
+
+        pairings.sort(key = len)
+        for pairing in pairings:
+            print(pairing)
                     
-                    PairIdx = randint(0, len(pairings) - 1)
-                    pairings[]
-                    
-
-
-
-        return pairings                
+        return pairings               
             
 
     def createRoomOrder(self, pairings):
@@ -65,7 +75,7 @@ class TdcGenerator:
     
     def createTDC():
         pass
-
+    
     def __testDistribution(self, list, n):
         dist = {}
         percDist = {}
@@ -94,8 +104,7 @@ class TdcGenerator:
 
 gen = TdcGenerator()
 
-
-gen.createRoomOrder()
+gen.createRoomPairings()
 #gen.testDistOldies(100000)
 #gen.testDistNewbies(100000) 
 
