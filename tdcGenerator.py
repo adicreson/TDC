@@ -5,6 +5,7 @@ class TdcGenerator:
     oldies = list({"Adam", "Axel", "Calle M", "Mathilda", "Anna", "Mirac", "Vilhelm", "Adi", "Tilde", "Stina", "Donja"})
     newbies = list({"Stella", "Morgan", "Riccardo", "Elin"})
     nbrOfRooms = 6
+    nbrOfParticipants = len(oldies) + len(newbies)
 
     def __init__(self):
         pass
@@ -36,10 +37,13 @@ class TdcGenerator:
         self.__testDistribution(self.newbies, n)
 
     def createRoomPairings(self):
+        assert self.nbrOfParticipants >= self.nbrOfRooms*2, "To0 few participants to create room pairings of two"
         parings = []
-        roomsToCreate = self.nbrOfRooms
-        while self.newbies:
+        roomsLeftToCreate = self.nbrOfRooms
+
+        if len(self.oldies) > len(self.newbies):
             pass
+            
 
 
 
@@ -51,6 +55,8 @@ class TdcGenerator:
 
 gen = TdcGenerator()
 
-gen.testDistOldies(100000000)
+
+gen.createRoomPairings()
+#gen.testDistOldies(100000)
 #gen.testDistNewbies(100000) 
 
