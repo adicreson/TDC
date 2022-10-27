@@ -2,8 +2,8 @@ from random import randint
 from xml.dom.pulldom import parseString
 
 class TdcGenerator:
-
     oldies = list({"Adam", "Axel", "Calle M", "Mathilda", "Anna", "Mirac", "Vilhelm", "Adi", "Tilde", "Stina", "Donja"})
+    #oldies = list({"Adam", "Axel", "Calle M", "Mathilda"})
     newbies = list({"Stella", "Morgan", "Riccardo", "Elin"})
     nbrOfRooms = 6
     nbrOfParticipants = len(oldies) + len(newbies)
@@ -11,13 +11,13 @@ class TdcGenerator:
     def __init__(self):
         pass
 
-    #Randomly selects a random Oldie from oldies
+    #Randomly selects a random oldie from oldies
     def __randomOldie(self):
         randOldIdx = randint(0, len(self.oldies) - 1)
         randOldie = self.oldies.pop(randOldIdx)
         return randOldie
 
-    #Randomly selects a random Oldie from newbies
+    #Randomly selects a random newbie from newbies
     def __randomNewbie(self):
         randNewbIdx = randint(0, len(self.newbies) - 1)
         randNewbie = self.newbies.pop(randNewbIdx)
@@ -34,8 +34,6 @@ class TdcGenerator:
             while self.newbies:
                 randNewbie = self.__randomNewbie()
                 randOldie = self.__randomOldie()
-                print(len(self.newbies))
-                print(len(self.oldies))
 
                 pairing = [randNewbie, randOldie]
                 pairings.append(pairing)
@@ -51,13 +49,11 @@ class TdcGenerator:
                     pairings.append(pairing)
 
                     roomsLeftToCreate -= 1
-                    print("Rooms left to create: {}", roomsLeftToCreate)
                 else:
                     #If there are still oldies left after all pairs of two have been created, assign them randomly to the already created pairings.
                     #Needs correction to ensure that the randOldies get evenly distributed
                     while self.oldies:
                         assert len(pairings) == self.nbrOfRooms, "Error in code. There should be an equal amount of pairings and number of rooms"
-                        print(len(self.oldies))
                         randOldie = self.__randomOldie()
                         pairIdx = randint(0, len(pairings) - 1)
                         pairings[pairIdx].append(randOldie)
@@ -86,15 +82,21 @@ class TdcGenerator:
         for i in range(n):
             randIndex = randint(0, len(list) - 1)
             element = list[randIndex]
-            dist[element] = dist.get(element, 0) + 1 ##Redundand to use get, since all values are set to 0.
+            dist[element] = dist.get(element, 0) + 1 #edundant to use get, since all values are set to 0.
 
         for key, value in dist.items():
                 percDist[key] = value/n
 
         theoDist = 1/(len(list))
-        print("Theoretical distribution: {:.4f}".format(theoDist))
+        sum = 0
+        print("Theoretical distribution: {:.3f}%".format(theoDist*100))
+        print("----------------------------")
         for key, value in percDist.items():
-            print("{} : {:.4f}".format(key, value))
+            print("{} : {:.3f}%".format(key, value*100))
+            sum += value
+        print("----------------------------")
+        print("Sum: {:.3f}%".format(sum*100))
+
 
     def testDistOldies(self, n):
         self.__testDistribution(self.oldies, n)
@@ -104,7 +106,7 @@ class TdcGenerator:
 
 gen = TdcGenerator()
 
-gen.createRoomPairings()
-#gen.testDistOldies(100000)
-#gen.testDistNewbies(100000) 
+#gen.createRoomPairings()
+gen.testDistOldies(1000)
+#gen.testDistNewbies(10000) 
 
