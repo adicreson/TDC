@@ -21,4 +21,4 @@ After this have been done:
 2. Clone the repo
 3. open tdcGenerator.py with an editor
 4. Create a list of oldies and newbies (see test lists for inspiration) and set number of rooms.
-5. write: python3 tdcGenerator.py in terminal while being in folder where the repo was cloned.
+5. write: <python3 tdcGenerator.py> in terminal while being in folder where the repo was cloned.
