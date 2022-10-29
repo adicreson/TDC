@@ -3,13 +3,13 @@ from random import randint
 class TdcGenerator:
     #Different lists for testing
     #oldies = list({"Oldie1"})
-    #oldies = list({"Oldie1", "Oldie2", "Oldie3", "Oldie4", "Oldie5"})
-    oldies = list({"Oldie1", "Oldie2", "Oldie3", "Oldie4", "Oldie5", "Oldie6", "Oldie7", "Oldie8", "Oldie9", "Oldie10"})
+    oldies = list({"Oldie1", "Oldie2", "Oldie3", "Oldie4", "Oldie5"})
+    #oldies = list({"Oldie1", "Oldie2", "Oldie3", "Oldie4", "Oldie5", "Oldie6", "Oldie7", "Oldie8", "Oldie9", "Oldie10"})
     #newbies = list({"Newbie1"})
-    #newbies = list({"Newbie1", "Newbie2", "Newbie3", "Newbie4", "Newbie5"})
-    newbies = list({"Newbie1", "Newbie2", "Newbie3", "Newbie4", "Newbie5", "Newbie6", "Newbie7", "Newbie8", "Newbie9", "Newbie10"})
+    newbies = list({"Newbie1", "Newbie2", "Newbie3", "Newbie4", "Newbie5"})
+    #newbies = list({"Newbie1", "Newbie2", "Newbie3", "Newbie4", "Newbie5", "Newbie6", "Newbie7", "Newbie8", "Newbie9", "Newbie10"})
 
-    nbrOfRooms = 3
+    nbrOfRooms = 5
     nbrOfParticipants = len(oldies) + len(newbies)
 
     def __init__(self):
@@ -36,7 +36,7 @@ class TdcGenerator:
         pairings = []
         roomsLeftToCreate = self.nbrOfRooms
 
-        #Start by creating pairs of newbies and oldies while there are rooms left to create
+            
         while self.newbies and self.oldies and roomsLeftToCreate > 0: 
             randNewbie = self.__randomNewbie()
             randOldie = self.__randomOldie()
